@@ -20,5 +20,8 @@
     "apps/*",
     "packages/*",
     "config/*"
-  ]
+  ],
+  "dependencies": {
+    "@clerk/nextjs": "6.3.0"
+  }
 }
