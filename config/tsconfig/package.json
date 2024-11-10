@@ -1,0 +1,12 @@
+{
+  "name": "@connecto/tsconfig",
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "files": [
+    "hono.json",
+    "nextjs.json",
+    "lib.json"
+  ]
+}
