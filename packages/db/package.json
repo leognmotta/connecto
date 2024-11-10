@@ -1,0 +1,38 @@
+{
+  "name": "@connecto/db",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "lint": "eslint .",
+    "generate:migration": "tsx scripts/create-migrations.ts",
+    "migrate": "infisical run --env=prod -- tsx scripts/migrator.ts",
+    "codegen": "infisical run --env=prod -- npx kysely-codegen --out-file=types/db.ts"
+  },
+  "dependencies": {
+    "kysely": "^0.27.4",
+    "pg": "^8.13.1",
+    "sql-formatter": "^15.4.5",
+    "@connecto/logger": "*"
+  },
+  "devDependencies": {
+    "@types/node": "20.4.0",
+    "@types/pg": "^8.11.10",
+    "commander": "^12.1.0",
+    "kysely-codegen": "^0.17.0",
+    "tsx": "^4.19.0"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@connecto/eslint-config/lib"
+    ]
+  },
+  "prettier": "@connecto/prettier",
+  "exports": {
+    ".": "./index.ts",
+    "./main": "./types/main.ts",
+    "./tenant": "./types/tenant.ts"
+  }
+}
