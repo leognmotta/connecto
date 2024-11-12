@@ -150,4 +150,5 @@ export {
   CommandItem,
   CommandShortcut,
   CommandSeparator,
+  CommandPrimitive,
 }
