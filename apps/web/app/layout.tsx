@@ -3,6 +3,7 @@ import './globals.css'
 import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+import NextTopLoader from 'nextjs-toploader'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -26,11 +27,20 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      signUpUrl="/sign-up"
+      signInUrl="/sign-in"
+      afterSignOutUrl="/"
+      signInForceRedirectUrl=""
+      appearance={{
+        variables: { colorPrimary: 'hsl(263.4 70% 50.4%)' },
+      }}
+    >
       <html lang="en">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
+          <NextTopLoader showSpinner={false} color="hsl(263.4 70% 50.4%)" />
           {children}
         </body>
       </html>
