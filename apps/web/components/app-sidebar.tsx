@@ -141,27 +141,27 @@ const data = {
   projects: [
     {
       name: 'Overview',
-      url: '/',
+      url: '',
       icon: Home,
     },
     {
       name: 'Workflows',
-      url: '#',
+      url: '/workflows',
       icon: Workflow,
     },
     {
       name: 'Credentials',
-      url: '#',
+      url: '/credentials',
       icon: Shield,
     },
     {
       name: 'Apps',
-      url: '#',
+      url: '/apps',
       icon: LayoutDashboard,
     },
     {
       name: 'Monitoring',
-      url: '#',
+      url: '/monitoring',
       icon: SquareActivity,
     },
   ],
