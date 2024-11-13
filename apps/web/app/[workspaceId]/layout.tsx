@@ -25,7 +25,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               'sm:w-[calc(100%-theme(spacing.10))] lg:mt-10 lg:pb-10',
             )}
           >
-            {children}
+            <div className="mt-4 flex gap-12">{children}</div>
           </div>
         </main>
       </div>
