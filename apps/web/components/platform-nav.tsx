@@ -1,6 +1,12 @@
 'use client'
 
-import { type LucideIcon } from 'lucide-react'
+import {
+  Home,
+  LayoutDashboard,
+  Shield,
+  SquareActivity,
+  Workflow,
+} from 'lucide-react'
 import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'
 
@@ -12,27 +18,47 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
 
-export function NavProjects({
-  projects,
-}: {
-  projects: {
-    name: string
-    url: string
-    icon: LucideIcon
-  }[]
-}) {
+const navigation = [
+  {
+    name: 'Overview',
+    url: '',
+    icon: Home,
+  },
+  {
+    name: 'Workflows',
+    url: '/workflows',
+    icon: Workflow,
+  },
+  {
+    name: 'Credentials',
+    url: '/credentials',
+    icon: Shield,
+  },
+  {
+    name: 'Apps',
+    url: '/apps',
+    icon: LayoutDashboard,
+  },
+  {
+    name: 'Monitoring',
+    url: '/monitoring',
+    icon: SquareActivity,
+  },
+]
+
+export function PlatformNav() {
   const { workspaceId } = useParams<{ workspaceId: string }>()
   const pathname = usePathname()
   const activeRoute =
-    projects.find(
+    navigation.find(
       (route) => route.url.length > 0 && pathname.includes(route.url),
-    ) || projects[0]
+    ) || navigation[0]
 
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
       <SidebarMenu>
-        {projects.map((item) => (
+        {navigation.map((item) => (
           <SidebarMenuItem
             data-active={activeRoute.url === item.url}
             key={item.name}

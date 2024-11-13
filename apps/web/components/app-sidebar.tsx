@@ -1,19 +1,9 @@
 'use client'
 
-import {
-  AudioWaveform,
-  Command,
-  GalleryVerticalEnd,
-  Home,
-  LayoutDashboard,
-  Shield,
-  SquareActivity,
-  Workflow,
-} from 'lucide-react'
 import Link from 'next/link'
 import * as React from 'react'
 
-import { NavProjects } from '@/components/nav-projects'
+import { PlatformNav } from '@/components/platform-nav'
 import { TeamSwitcher } from '@/components/team-switcher'
 import {
   Sidebar,
@@ -24,156 +14,107 @@ import {
   SidebarRail,
 } from '@/components/ui/sidebar'
 
+import { NavUser } from './nav-user'
 import Logo from './ui/logo'
 
-// This is sample data.
-const data = {
-  user: {
-    name: 'shadcn',
-    email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg',
-  },
-  teams: [
-    {
-      name: 'Acme Inc',
-      logo: GalleryVerticalEnd,
-      plan: 'Enterprise',
-    },
-    {
-      name: 'Acme Corp.',
-      logo: AudioWaveform,
-      plan: 'Startup',
-    },
-    {
-      name: 'Evil Corp.',
-      logo: Command,
-      plan: 'Free',
-    },
-  ],
-  // TODO: this is how the sub navigation will look like
-  // subnavigation: [
-  //   {
-  //     title: 'Playground',
-  //     url: '#',
-  //     icon: SquareTerminal,
-  //     isActive: false,
-  //     items: [
-  //       {
-  //         title: 'History',
-  //         url: '#',
-  //       },
-  //       {
-  //         title: 'Starred',
-  //         url: '#',
-  //       },
-  //       {
-  //         title: 'Settings',
-  //         url: '#',
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     title: 'Models',
-  //     url: '#',
-  //     icon: Bot,
-  //     items: [
-  //       {
-  //         title: 'Genesis',
-  //         url: '#',
-  //       },
-  //       {
-  //         title: 'Explorer',
-  //         url: '#',
-  //       },
-  //       {
-  //         title: 'Quantum',
-  //         url: '#',
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     title: 'Documentation',
-  //     url: '#',
-  //     icon: BookOpen,
-  //     items: [
-  //       {
-  //         title: 'Introduction',
-  //         url: '#',
-  //       },
-  //       {
-  //         title: 'Get Started',
-  //         url: '#',
-  //       },
-  //       {
-  //         title: 'Tutorials',
-  //         url: '#',
-  //       },
-  //       {
-  //         title: 'Changelog',
-  //         url: '#',
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     title: 'Settings',
-  //     url: '#',
-  //     icon: Settings2,
-  //     items: [
-  //       {
-  //         title: 'General',
-  //         url: '#',
-  //       },
-  //       {
-  //         title: 'Team',
-  //         url: '#',
-  //       },
-  //       {
-  //         title: 'Billing',
-  //         url: '#',
-  //       },
-  //       {
-  //         title: 'Limits',
-  //         url: '#',
-  //       },
-  //     ],
-  //   },
-  // ],
-  projects: [
-    {
-      name: 'Overview',
-      url: '',
-      icon: Home,
-    },
-    {
-      name: 'Workflows',
-      url: '/workflows',
-      icon: Workflow,
-    },
-    {
-      name: 'Credentials',
-      url: '/credentials',
-      icon: Shield,
-    },
-    {
-      name: 'Apps',
-      url: '/apps',
-      icon: LayoutDashboard,
-    },
-    {
-      name: 'Monitoring',
-      url: '/monitoring',
-      icon: SquareActivity,
-    },
-  ],
-}
+// TODO: this is how the sub navigation will look like
+// subnavigation: [
+//   {
+//     title: 'Playground',
+//     url: '#',
+//     icon: SquareTerminal,
+//     isActive: false,
+//     items: [
+//       {
+//         title: 'History',
+//         url: '#',
+//       },
+//       {
+//         title: 'Starred',
+//         url: '#',
+//       },
+//       {
+//         title: 'Settings',
+//         url: '#',
+//       },
+//     ],
+//   },
+//   {
+//     title: 'Models',
+//     url: '#',
+//     icon: Bot,
+//     items: [
+//       {
+//         title: 'Genesis',
+//         url: '#',
+//       },
+//       {
+//         title: 'Explorer',
+//         url: '#',
+//       },
+//       {
+//         title: 'Quantum',
+//         url: '#',
+//       },
+//     ],
+//   },
+//   {
+//     title: 'Documentation',
+//     url: '#',
+//     icon: BookOpen,
+//     items: [
+//       {
+//         title: 'Introduction',
+//         url: '#',
+//       },
+//       {
+//         title: 'Get Started',
+//         url: '#',
+//       },
+//       {
+//         title: 'Tutorials',
+//         url: '#',
+//       },
+//       {
+//         title: 'Changelog',
+//         url: '#',
+//       },
+//     ],
+//   },
+//   {
+//     title: 'Settings',
+//     url: '#',
+//     icon: Settings2,
+//     items: [
+//       {
+//         title: 'General',
+//         url: '#',
+//       },
+//       {
+//         title: 'Team',
+//         url: '#',
+//       },
+//       {
+//         title: 'Billing',
+//         url: '#',
+//       },
+//       {
+//         title: 'Limits',
+//         url: '#',
+//       },
+//     ],
+//   },
+// ],
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <SidebarMenuButton asChild>
+        <SidebarMenuButton className="mb-8" size="lg" asChild>
           <Link href="/">
-            <Logo />
+            <div className="flex aspect-square size-8 items-center justify-center rounded-lg text-sidebar-primary-foreground">
+              <Logo />
+            </div>
             <span>
               <svg
                 className="h-auto w-16"
@@ -189,13 +130,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </span>
           </Link>
         </SidebarMenuButton>
+
+        <TeamSwitcher />
       </SidebarHeader>
       <SidebarContent>
-        {/* <NavMain items={data.navMain} /> */}
-        <NavProjects projects={data.projects} />
+        <PlatformNav />
       </SidebarContent>
       <SidebarFooter>
-        <TeamSwitcher teams={data.teams} />
+        <NavUser />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

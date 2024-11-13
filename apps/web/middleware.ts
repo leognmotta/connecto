@@ -1,14 +1,15 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
-
-const isPublicRoute = createRouteMatcher([
-  '/blog(.*)',
-  '/sign-in(.*)',
-  '/sign-up(.*)',
-  '/',
-])
+import { clerkMiddleware } from '@clerk/nextjs/server'
 
 export default clerkMiddleware(async (auth, req) => {
-  if (!isPublicRoute(req)) await auth.protect()
+  const pathname = req.nextUrl.pathname
+  const shouldProtect = !!pathname.match(
+    /^\/(org_[a-zA-Z0-9]+|user_[a-zA-Z0-9]+)/,
+  )
+
+  // Check if path starts with /org_ or /user_ which indicates a workspace route
+  if (shouldProtect) {
+    await auth.protect()
+  }
 })
 
 export const config = {

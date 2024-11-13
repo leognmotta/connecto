@@ -11,6 +11,9 @@ import CreateOrganizationModal, {
 import ManageOrganizationModal, {
   MANAGE_ORGANIZATION_MODAL_ID,
 } from './manage-organization-modal'
+import ManageProfileModal, {
+  MANAGE_PROFILE_NODAL_ID,
+} from './manage-profile-modal'
 
 export default function ModalManager() {
   const { modals, closeModal } = useModalStore()
@@ -30,6 +33,7 @@ export default function ModalManager() {
       {Boolean(modals[CREATE_ORGANIZATION_MODAL_ID]?.open) && (
         <CreateOrganizationModal />
       )}
+      {Boolean(modals[MANAGE_PROFILE_NODAL_ID]?.open) && <ManageProfileModal />}
     </>
   )
 }
