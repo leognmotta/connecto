@@ -20,10 +20,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </header>
 
-        <main className="flex flex-1 flex-col gap-4 p-4">
-          <ModalManager />
-          {children}
-        </main>
+        <ModalManager />
+
+        <main className="flex flex-1 flex-col gap-4 px-6 py-4">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   )

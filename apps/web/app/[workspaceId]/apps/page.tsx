@@ -1,3 +1,41 @@
+import { ColumnDef } from '@tanstack/react-table'
+import { Rocket } from 'lucide-react'
+import * as React from 'react'
+
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+
+type AppsTableData = {
+  id: string
+  name: string
+  logoUrl?: string
+}
+
+export const columns: ColumnDef<AppsTableData>[] = [
+  {
+    accessorKey: 'name',
+    header: 'Name',
+    cell: ({ row }) => {
+      const { name } = row.original
+
+      return (
+        <div className="truncate">
+          <Avatar className="h-6 w-6 rounded-sm text-muted-foreground">
+            <AvatarImage
+              src={row.original.logoUrl}
+              alt={row.original.name}
+              className="aspect-square size-6 rounded-sm"
+            />
+            <AvatarFallback className="rounded-sm bg-transparent">
+              <Rocket />
+            </AvatarFallback>
+          </Avatar>
+          {name}
+        </div>
+      )
+    },
+  },
+]
+
 export default function Apps() {
   return (
     <div className="w-full flex-1 max-lg:space-y-6">

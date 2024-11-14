@@ -4,6 +4,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import NextTopLoader from 'nextjs-toploader'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -35,13 +36,14 @@ export default function RootLayout({
       appearance={{
         variables: { colorPrimary: 'hsl(263.4 70% 50.4%)' },
       }}
+      dynamic
     >
       <html lang="en">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <NextTopLoader showSpinner={false} color="hsl(263.4 70% 50.4%)" />
-          {children}
+          <NuqsAdapter>{children}</NuqsAdapter>
         </body>
       </html>
     </ClerkProvider>

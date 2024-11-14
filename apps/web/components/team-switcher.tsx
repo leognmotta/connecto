@@ -2,7 +2,6 @@
 
 import { useOrganization, useOrganizationList, useUser } from '@clerk/nextjs'
 import { ChevronsUpDown, Plus, Settings } from 'lucide-react'
-import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import * as React from 'react'
 
@@ -24,6 +23,7 @@ import useModalStore from '@/store/modals'
 
 import { CREATE_ORGANIZATION_MODAL_ID } from './modals/create-organization-modal'
 import { MANAGE_ORGANIZATION_MODAL_ID } from './modals/manage-organization-modal'
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
 
 export function TeamSwitcher() {
@@ -88,13 +88,17 @@ export function TeamSwitcher() {
             >
               <div className="flex aspect-square size-8 items-center justify-center rounded-lg text-sidebar-primary-foreground">
                 {activeTeam.logo && (
-                  <Image
-                    src={activeTeam.logo || ''}
-                    className="aspect-square size-8 rounded-lg"
-                    alt="profile image"
-                    width={16}
-                    height={16}
-                  />
+                  <Avatar className="h-8 w-8 rounded-lg">
+                    <AvatarImage
+                      src={activeTeam.logo || ''}
+                      alt={activeTeam.name || 'organization logo'}
+                      className="aspect-square size-8 rounded-lg"
+                    />
+                    <AvatarFallback className="rounded-lg">
+                      {activeTeam?.name?.[0]}
+                      {activeTeam?.name?.[1]}
+                    </AvatarFallback>
+                  </Avatar>
                 )}
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
@@ -120,13 +124,17 @@ export function TeamSwitcher() {
                 }
               }}
             >
-              <Image
-                src={activeTeam.logo || ''}
-                className="flex aspect-square size-6 items-center justify-center rounded-sm border"
-                alt="profile image"
-                width={16}
-                height={16}
-              />
+              <Avatar className="h-8 w-8 rounded-lg">
+                <AvatarImage
+                  src={activeTeam.logo || ''}
+                  alt={activeTeam.name || 'organization logo'}
+                  className="flex aspect-square size-8 items-center justify-center rounded-sm border"
+                />
+                <AvatarFallback className="rounded-sm">
+                  {activeTeam?.name?.[0]}
+                  {activeTeam?.name?.[1]}
+                </AvatarFallback>
+              </Avatar>
 
               <div className="flex w-full items-center justify-between">
                 {activeTeam.name}
@@ -153,13 +161,17 @@ export function TeamSwitcher() {
                 onClick={() => handleOrganizationSelect(team.value)}
                 className="gap-2 p-2"
               >
-                <Image
-                  src={team.logo || ''}
-                  className="flex size-6 items-center justify-center rounded-sm border"
-                  alt="profile image"
-                  width={16}
-                  height={16}
-                />
+                <Avatar className="flex h-8 w-8 items-center justify-center rounded-lg">
+                  <AvatarImage
+                    src={team.logo || ''}
+                    alt={team.name || 'organization logo'}
+                    className="flex size-6 items-center justify-center rounded-sm border"
+                  />
+                  <AvatarFallback className="rounded-sm">
+                    {activeTeam?.name?.[0]}
+                    {activeTeam?.name?.[1]}
+                  </AvatarFallback>
+                </Avatar>
                 {team.name}
               </DropdownMenuItem>
             ))}
