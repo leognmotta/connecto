@@ -2,7 +2,6 @@
 
 import { useOrganization, useOrganizationList, useUser } from '@clerk/nextjs'
 import { ChevronsUpDown, Plus, Settings } from 'lucide-react'
-import { useParams } from 'next/navigation'
 import * as React from 'react'
 
 import {
@@ -27,7 +26,6 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
 
 export function TeamSwitcher() {
-  const { workspaceId } = useParams<{ workspaceId: string }>()
   const { openModal } = useModalStore()
   const { organization } = useOrganization()
   const { userMemberships, setActive } = useOrganizationList({
@@ -72,10 +70,6 @@ export function TeamSwitcher() {
   const handleCreateOrganization = () => {
     openModal(CREATE_ORGANIZATION_MODAL_ID)
   }
-
-  React.useEffect(() => {
-    userMemberships?.revalidate?.()
-  }, [workspaceId, userMemberships.revalidate, userMemberships])
 
   return (
     <SidebarMenu>

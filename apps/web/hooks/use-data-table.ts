@@ -49,6 +49,9 @@ export function useDataTable<T>(data: T[], columns: ColumnDef<T>[]) {
       defaultValue: {},
     },
   )
+  const [search, setSearch] = useQueryState('q', {
+    defaultValue: '',
+  })
 
   const table = useReactTable({
     data,
@@ -58,11 +61,16 @@ export function useDataTable<T>(data: T[], columns: ColumnDef<T>[]) {
     getCoreRowModel: getCoreRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    onGlobalFilterChange: setSearch,
+    manualFiltering: true,
+    manualPagination: true,
+    manualSorting: true,
     state: {
       sorting,
       columnFilters,
       columnVisibility,
       rowSelection,
+      globalFilter: search,
     },
   })
 

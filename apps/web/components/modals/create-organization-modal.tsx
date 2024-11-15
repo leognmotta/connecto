@@ -15,7 +15,7 @@ export default function CreateOrganizationModal() {
       open={Boolean(modalState?.open)}
       onOpenChange={() => toggleModal(CREATE_ORGANIZATION_MODAL_ID)}
     >
-      <DialogTitle hidden>test</DialogTitle>
+      <DialogTitle hidden>create organization</DialogTitle>
       <DialogContent
         className="flex h-[360px] max-w-[432px] items-center justify-center border-none bg-transparent p-0"
         closeClassName="right-8 lg:right-4"

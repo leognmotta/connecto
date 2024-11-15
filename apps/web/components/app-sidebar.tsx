@@ -14,7 +14,7 @@ import {
   SidebarRail,
 } from '@/components/ui/sidebar'
 
-import { NavUser } from './nav-user'
+// import { NavUser } from './nav-user'
 import Logo from './ui/logo'
 
 // TODO: this is how the sub navigation will look like
@@ -136,9 +136,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <PlatformNav />
       </SidebarContent>
-      <SidebarFooter>
-        <NavUser />
-      </SidebarFooter>
+      <SidebarFooter>{/* <NavUser /> */}</SidebarFooter>
       <SidebarRail />
     </Sidebar>
   )

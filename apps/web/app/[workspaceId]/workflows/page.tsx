@@ -1,7 +1,6 @@
 'use client'
 
 import { ColumnDef } from '@tanstack/react-table'
-import { ArrowUpDown } from 'lucide-react'
 import * as React from 'react'
 
 import { Button } from '@/components/ui/button'
@@ -9,9 +8,7 @@ import {
   DataTable,
   DataTableActions,
   DataTableBody,
-  DataTableColumns,
   DataTableHeader,
-  DataTablePagination,
   DataTableRoot,
   DataTableSearch,
 } from '@/components/ui/data-table'
@@ -67,16 +64,8 @@ type Payment = {
 const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: 'email',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Email
-          <ArrowUpDown />
-        </Button>
-      )
+    header: () => {
+      return <div>All apps</div>
     },
     cell: ({ row }) => <div className="lowercase">{row.getValue('email')}</div>,
   },
@@ -90,19 +79,103 @@ export default function DataTableDemo() {
   }, [tableState])
 
   return (
-    <DataTableRoot table={table}>
-      <DataTableActions>
-        <DataTableSearch filterKey="email" placeholder="Filter emails..." />
+    <div className="flex items-start gap-8">
+      <div className="mx-auto w-full max-w-screen-lg">
+        <DataTableRoot table={table}>
+          <DataTableActions className="flex items-center justify-between gap-8">
+            <DataTableSearch
+              placeholder="Filter emails..."
+              className="w-full border-none shadow-none focus-visible:ring-0"
+            />
 
-        <DataTableColumns />
-      </DataTableActions>
+            <Button>Create Workflow</Button>
+          </DataTableActions>
 
-      <DataTable>
-        <DataTableHeader />
-        <DataTableBody />
-      </DataTable>
+          <DataTable>
+            <DataTableHeader />
+            <DataTableBody />
+          </DataTable>
+        </DataTableRoot>
+        <DataTableRoot table={table}>
+          <DataTableActions className="flex items-center justify-between gap-8">
+            <DataTableSearch
+              placeholder="Filter emails..."
+              className="w-full border-none shadow-none focus-visible:ring-0"
+            />
 
-      <DataTablePagination />
-    </DataTableRoot>
+            <Button>Create Workflow</Button>
+          </DataTableActions>
+
+          <DataTable>
+            <DataTableHeader />
+            <DataTableBody />
+          </DataTable>
+        </DataTableRoot>
+        <DataTableRoot table={table}>
+          <DataTableActions className="flex items-center justify-between gap-8">
+            <DataTableSearch
+              placeholder="Filter emails..."
+              className="w-full border-none shadow-none focus-visible:ring-0"
+            />
+
+            <Button>Create Workflow</Button>
+          </DataTableActions>
+
+          <DataTable>
+            <DataTableHeader />
+            <DataTableBody />
+          </DataTable>
+        </DataTableRoot>
+        <DataTableRoot table={table}>
+          <DataTableActions className="flex items-center justify-between gap-8">
+            <DataTableSearch
+              placeholder="Filter emails..."
+              className="w-full border-none shadow-none focus-visible:ring-0"
+            />
+
+            <Button>Create Workflow</Button>
+          </DataTableActions>
+
+          <DataTable>
+            <DataTableHeader />
+            <DataTableBody />
+          </DataTable>
+        </DataTableRoot>
+        <DataTableRoot table={table}>
+          <DataTableActions className="flex items-center justify-between gap-8">
+            <DataTableSearch
+              placeholder="Filter emails..."
+              className="w-full border-none shadow-none focus-visible:ring-0"
+            />
+
+            <Button>Create Workflow</Button>
+          </DataTableActions>
+
+          <DataTable>
+            <DataTableHeader />
+            <DataTableBody />
+          </DataTable>
+        </DataTableRoot>
+        <DataTableRoot table={table}>
+          <DataTableActions className="flex items-center justify-between gap-8">
+            <DataTableSearch
+              placeholder="Filter emails..."
+              className="w-full border-none shadow-none focus-visible:ring-0"
+            />
+
+            <Button>Create Workflow</Button>
+          </DataTableActions>
+
+          <DataTable>
+            <DataTableHeader />
+            <DataTableBody />
+          </DataTable>
+        </DataTableRoot>
+      </div>
+
+      <div className="sticky top-4 mt-[70px] h-full max-h-[740px] w-[480px] border">
+        side content
+      </div>
+    </div>
   )
 }

@@ -1,5 +1,5 @@
 import { flexRender, Table as TStackTable } from '@tanstack/react-table'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, Search } from 'lucide-react'
 import React, { createContext, useContext } from 'react'
 
 import {
@@ -72,20 +72,26 @@ DataTableActions.displayName = 'DataTableActions'
 
 export const DataTableSearch = React.forwardRef<
   HTMLInputElement,
-  React.InputHTMLAttributes<HTMLInputElement> & { filterKey: string }
->(({ className, filterKey, ...props }, ref) => {
+  React.InputHTMLAttributes<HTMLInputElement>
+>(({ className, ...props }, ref) => {
   const { table } = useDataTableContext()
 
   return (
-    <Input
-      ref={ref}
-      value={(table.getColumn(filterKey)?.getFilterValue() as string) ?? ''}
-      onChange={(event) =>
-        table.getColumn(filterKey)?.setFilterValue(event.target.value)
-      }
-      className={cn('max-w-sm', className)}
-      {...props}
-    />
+    <div className="flex w-full items-center justify-center gap-2 rounded-md border border-input shadow-sm focus-within:ring-1 focus-within:ring-ring">
+      <div className="px-2">
+        <Search className="w-5 text-muted-foreground" />
+      </div>
+      <Input
+        ref={ref}
+        value={table.getState().globalFilter ?? ''}
+        onChange={(event) => table.setGlobalFilter(event.target.value)}
+        className={cn(
+          'w-full border-none px-0 shadow-none focus-visible:ring-0',
+          className,
+        )}
+        {...props}
+      />
+    </div>
   )
 })
 DataTableSearch.displayName = 'DataTableSearch'
@@ -137,7 +143,7 @@ export const DataTableHeader = () => {
   const { table } = useDataTableContext()
 
   return (
-    <TableHeader>
+    <TableHeader className="[&_tr]:border-0">
       {table.getHeaderGroups().map((headerGroup) => (
         <TableRow key={headerGroup.id} className="h-12 bg-muted">
           {headerGroup.headers.map((header) => {
@@ -162,16 +168,16 @@ export const DataTableBody = () => {
   const { table } = useDataTableContext()
 
   return (
-    <TableBody>
+    <TableBody className="bg-background">
       {table.getRowModel().rows?.length ? (
         table.getRowModel().rows.map((row) => (
           <TableRow
             key={row.id}
             data-state={row.getIsSelected() && 'selected'}
-            className="h-12"
+            className="h-12 w-full"
           >
             {row.getVisibleCells().map((cell) => (
-              <TableCell key={cell.id}>
+              <TableCell key={cell.id} className="w-full p-0">
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </TableCell>
             ))}

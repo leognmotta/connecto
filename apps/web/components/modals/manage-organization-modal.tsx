@@ -17,7 +17,7 @@ export default function ManageOrganizationModal() {
       open={Boolean(modalState?.open && isLoaded && organization?.id)}
       onOpenChange={() => toggleModal(MANAGE_ORGANIZATION_MODAL_ID)}
     >
-      <DialogTitle hidden>test</DialogTitle>
+      <DialogTitle hidden>manage organization</DialogTitle>
       <DialogContent
         className="flex h-[704px] max-w-[850px] items-center justify-center border-none bg-transparent p-0"
         closeClassName="right-8 lg:right-4"

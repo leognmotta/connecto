@@ -1,4 +1,4 @@
-export default function App() {
+export default async function App() {
   return (
     <div>
       <h1></h1>
