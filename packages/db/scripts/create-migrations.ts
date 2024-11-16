@@ -17,27 +17,30 @@ function generateRandomName(length: number = 8): string {
 // The migration template
 const migrationTemplate = `import { Kysely } from 'kysely';
 
-export async function up(db: Kysely<any>): Promise<void> {
+export async function up(db: Kysely<unknown>): Promise<void> {
   // Migration code
 }
 
-export async function down(db: Kysely<any>): Promise<void> {
+export async function down(db: Kysely<unknown>): Promise<void> {
   // Migration code
 }
-
 `
 
 // Setting up the command line options with commander
 const program = new Command()
-program.option('--name <name>', 'Name of the migration')
+program
+  .name('create-migration')
+  .description('Create a new migration file')
+  .argument('[name]', 'Name of the migration')
+  .parse()
 
-program.parse(process.argv)
-
-const options = program.opts()
-const migrationName = options.name || generateRandomName()
+const migrationName = program.args[0] || generateRandomName()
 
 // Generate the filename with the ISO 8601 date
-const datePrefix = Date.now()
+const datePrefix = new Date()
+  .toISOString()
+  .replace(/[-:T.Z]/g, '')
+  .slice(0, 14)
 const fileName = `${datePrefix}-${migrationName}.ts`
 
 // Handle ES Module __dirname workaround
