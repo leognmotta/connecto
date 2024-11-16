@@ -32,7 +32,7 @@
   "prettier": "@connecto/prettier",
   "exports": {
     ".": "./index.ts",
-    "./main": "./types/main.ts",
-    "./tenant": "./types/tenant.ts"
+    "./db": "./types/db.ts",
+    "./codegen": "./types/codegen.ts"
   }
 }
