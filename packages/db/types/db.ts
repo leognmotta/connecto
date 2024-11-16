@@ -3,4 +3,90 @@
  * Please do not edit it manually.
  */
 
-export interface DB {}
+import type { ColumnType } from "kysely";
+
+export type AppType = "App" | "Utility";
+
+export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
+  ? ColumnType<S, I | undefined, U>
+  : ColumnType<T, T | undefined, T>;
+
+export type Json = JsonValue;
+
+export type JsonArray = JsonValue[];
+
+export type JsonObject = {
+  [x: string]: JsonValue | undefined;
+};
+
+export type JsonPrimitive = boolean | number | string | null;
+
+export type JsonValue = JsonArray | JsonObject | JsonPrimitive;
+
+export type Timestamp = ColumnType<Date, Date | string, Date | string>;
+
+export interface App {
+  created_at: Generated<Timestamp | null>;
+  description: string | null;
+  documentation_url: string | null;
+  id: string;
+  is_global: Generated<boolean | null>;
+  logo_url: string | null;
+  managed_by: string | null;
+  name: string;
+  open_api_specification_url: string | null;
+  slug: string;
+  type: Generated<AppType | null>;
+  updated_at: Generated<Timestamp | null>;
+  website: string | null;
+}
+
+export interface AppVersion {
+  app_id: string | null;
+  created_at: Generated<Timestamp | null>;
+  definition: Json | null;
+  id: string;
+  updated_at: Generated<Timestamp | null>;
+  version: string;
+}
+
+export interface AuditLog {
+  action: string;
+  actor: Json;
+  context: Json | null;
+  id: string;
+  occurred_at: Timestamp;
+  targets: Json | null;
+  workspace_id: string | null;
+}
+
+export interface Credential {
+  app_id: string;
+  created_at: Generated<Timestamp | null>;
+  id: string;
+  meta: Json | null;
+  updated_at: Generated<Timestamp | null>;
+  verified_at: Timestamp | null;
+  workspace_id: string | null;
+}
+
+export interface Workflow {
+  created_at: Generated<Timestamp | null>;
+  created_by: string | null;
+  definition: Json | null;
+  deleted_at: Timestamp | null;
+  description: string | null;
+  id: string;
+  is_active: Generated<boolean | null>;
+  name: string;
+  updated_at: Generated<Timestamp | null>;
+  workspace_id: string | null;
+}
+
+export interface DB {
+  app: App;
+  app_version: AppVersion;
+  audit_log: AuditLog;
+  credential: Credential;
+  workflow: Workflow;
+}
